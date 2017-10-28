@@ -83,7 +83,7 @@ class gmailQuerier:
             print('No ids found.')
         else:
             for ids in messageids:
-                GetMessage(service, 'me', ids['id'])
+                self.get_message(service, 'me', ids['id'])
 
     def list_messages_matching_query(self, service, user_id, query=''):
         """List all Messages of the user's mailbox matching the query.
@@ -116,7 +116,7 @@ class gmailQuerier:
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
-    def GetMessage(service, user_id, msg_id):
+    def get_message(self, service, user_id, msg_id):
         """Get a Message with given ID.
 
         Args:
