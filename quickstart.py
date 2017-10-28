@@ -7,6 +7,7 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 from firebase import firebase
+import time
 
 try:
     import argparse
@@ -31,7 +32,7 @@ class gmailQuerier:
         while True: 
             new_user = 'User{0}'.format(self.user_number)
             print ('We are writing this user to database:' + new_user)
-            result = firebase.post('/users', new_user)
+            result = self.firebase.post('/users', new_user)
             time.sleep(10)
             self.user_number += 1
 
