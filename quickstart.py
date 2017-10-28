@@ -30,7 +30,7 @@ class gmailQuerier:
 
         while True: 
             new_user = 'User{0}'.format(self.user_number)
-            print 'We are writing this user to database: {0}'.format(new_user)
+            print 'We are writing this user to database:' + new_user
             result = firebase.post('/users', new_user)
             time.sleep(10)
             self.user_number += 1
