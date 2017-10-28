@@ -99,9 +99,9 @@ class gmailQuerier:
             appropriate ID to get the details of a Message.
         """
         try:
-        response = service.users().messages().list(userId=user_id,
-                                                   q=query).execute()
-        messages = []
+            response = service.users().messages().list(userId=user_id,
+                                                       q=query).execute()
+            messages = []
         if 'messages' in response:
           messages.extend(response['messages'])
 
