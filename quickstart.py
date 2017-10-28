@@ -6,6 +6,7 @@ from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
+from firebase import firebase
 
 try:
     import argparse
@@ -18,6 +19,10 @@ except ImportError:
 SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
+
+firebase = firebase.FirebaseApplication('https://firebasedemo-184316.firebaseio.com', None)
+new_user = '7148560077'
+result = firebase.post('/users', new_user)
 
 
 def get_credentials():
