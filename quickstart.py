@@ -71,7 +71,7 @@ class gmailQuerier:
         Creates a Gmail API service object and outputs a list of label names
         of the user's Gmail account.
         """
-        credentials = get_credentials()
+        credentials = self.get_credentials()
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
@@ -84,7 +84,7 @@ class gmailQuerier:
             for ids in messageids:
                 print(ids['id'])
 
-    def ListMessagesMatchingQuery(service, user_id, query=''):
+    def ListMessagesMatchingQuery(self, service, user_id, query=''):
         """List all Messages of the user's mailbox matching the query.
         Args:
             service: Authorized Gmail API service instance.
