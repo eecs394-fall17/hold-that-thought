@@ -20,7 +20,7 @@ SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
 
-firebase = firebase.FirebaseApplication('https://firebasedemo-184316.firebaseio.com', None)
+firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
 new_user = '7148560077'
 result = firebase.post('/users', new_user)
 
