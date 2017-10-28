@@ -75,19 +75,45 @@ class gmailQuerier:
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
-        results = service.users().labels().list(userId='me').execute()
-        labels = results.get('labels', [])
-
-        if not labels:
-            print('No labels found.')
+        messageids = ListMessagesMatchingQuery(service, 'me', '')
+            
+        if not messageids:
+            print('No ids found.')
         else:
-          print('Labels:')
-          for label in labels:
-            print(label['name'])
+            print('Message Ids: ')
+            for ids in messageids:
+                print(ids['id'])
 
+    def ListMessagesMatchingQuery(service, user_id, query=''):
+        """List all Messages of the user's mailbox matching the query.
+        Args:
+            service: Authorized Gmail API service instance.
+            user_id: User's email address. The special value "me"
+            can be used to indicate the authenticated user.
+            query: String used to filter messages returned.
+            Eg.- 'from:user@some_domain.com' for Messages from a particular sender.
 
-    # if __name__ == '__main__':
-    #    main()
+        Returns:
+            List of Messages that match the criteria of the query. Note that the
+            returned list contains Message IDs, you must use get with the
+            appropriate ID to get the details of a Message.
+        """
+        try:
+        response = service.users().messages().list(userId=user_id,
+                                                   q=query).execute()
+        messages = []
+        if 'messages' in response:
+          messages.extend(response['messages'])
+
+        while 'nextPageToken' in response:
+          page_token = response['nextPageToken']
+          response = service.users().messages().list(userId=user_id, q=query,
+                                             pageToken=page_token).execute()
+          messages.extend(response['messages'])
+
+        return messages
+        except errors.HttpError, error:
+        print('An error occurred: %s' % error)
 
 myObject = gmailQuerier()
-myObject.post_new_users()
+myObject.main()
