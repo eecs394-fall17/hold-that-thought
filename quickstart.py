@@ -28,15 +28,26 @@ class gmailQuerier:
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
 
-    def post_new_users(self):
-        self.user_number = 1
+    def post_new_texts(self, name, time, snippet):
 
-        while True: 
-            new_user = 'User{0}'.format(self.user_number)
-            print ('We are writing this user to database:' + new_user)
-            result = self.firebase.post('/users', new_user)
-            time.sleep(10)
-            self.user_number += 1
+        self.firebase.post('/users/' + name + '/', {'time': time, 'message': snippet})
+        newresult = self.firebase.get('/users/', name)
+        print('We have added this entry: %s' % newresult)
+
+
+        '''print("In post new texts: %s" % name)
+        result = self.firebase.get('/users/', name, snippet)
+
+
+        if result is not None:
+            print('We found a user')
+
+        else:
+            print('We did not find ')
+
+            self.firebase.post('/users/' + name + '/', {'time': time, 'message': snippet})
+            newresult = self.firebase.get('/users/', name)
+            print('We have added this entry: %s' % newresult)'''
 
 
     def get_credentials(self):
@@ -116,6 +127,21 @@ class gmailQuerier:
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
+    def delete_message(self, service, user_id, msg_id):
+        """Delete a Message.
+
+        Args:
+            service: Authorized Gmail API service instance.
+            user_id: User's email address. The special value "me"
+            can be used to indicate the authenticated user.
+            msg_id: ID of Message to delete.
+        """
+        try:
+            service.users().messages().delete(userId=user_id, id=msg_id).execute()
+            print('Message with id: %s deleted successfully.' % msg_id)
+        except errors.HttpError, error:
+            print('An error occurred: %s' % error)
+
     def get_message(self, service, user_id, msg_id):
         """Get a Message with given ID.
 
@@ -140,8 +166,9 @@ class gmailQuerier:
             print('Time: %s' % time)
 
             print('Message snippet: %s' % message['snippet'])
+            self.post_new_texts(name[:9], time, message['snippet'])
+            self.delete_message(service, 'me', msg_id)
 
-            return message
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
