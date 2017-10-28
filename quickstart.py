@@ -1,6 +1,8 @@
 from __future__ import print_function
 import httplib2
 import os
+import base64
+import email
 
 from apiclient import discovery, errors
 from oauth2client import client
@@ -80,9 +82,8 @@ class gmailQuerier:
         if not messageids:
             print('No ids found.')
         else:
-            print('Message Ids: ')
             for ids in messageids:
-                print(ids['id'])
+                GetMessage(service, 'me', ids['id'])
 
     def list_messages_matching_query(self, service, user_id, query=''):
         """List all Messages of the user's mailbox matching the query.
@@ -112,6 +113,35 @@ class gmailQuerier:
               messages.extend(response['messages'])
 
             return messages
+        except errors.HttpError, error:
+            print('An error occurred: %s' % error)
+
+    def GetMessage(service, user_id, msg_id):
+        """Get a Message with given ID.
+
+        Args:
+            service: Authorized Gmail API service instance.
+            user_id: User's email address. The special value "me"
+            can be used to indicate the authenticated user.
+            msg_id: The ID of the Message required.
+
+        Returns:
+            A Message.
+        """
+        try:
+            message = service.users().messages().get(userId=user_id, id=msg_id).execute()
+            payload = message['payload']
+            headers = payload['headers']
+            sender = headers[18]
+            sent = headers[19]
+            name = sender['value']
+            time = sent['value']
+            print('Sender: %s' % name)
+            print('Time: %s' % time)
+
+            print('Message snippet: %s' % message['snippet'])
+
+            return message
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
