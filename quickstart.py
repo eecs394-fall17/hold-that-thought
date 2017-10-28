@@ -75,7 +75,7 @@ class gmailQuerier:
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
-        messageids = ListMessagesMatchingQuery(service, 'me', '')
+        messageids = self.list_messages_matching_query(service, 'me', '')
             
         if not messageids:
             print('No ids found.')
@@ -84,7 +84,7 @@ class gmailQuerier:
             for ids in messageids:
                 print(ids['id'])
 
-    def ListMessagesMatchingQuery(self, service, user_id, query=''):
+    def list_messages_matching_query(self, service, user_id, query=''):
         """List all Messages of the user's mailbox matching the query.
         Args:
             service: Authorized Gmail API service instance.
