@@ -37,7 +37,7 @@ class gmailQuerier:
             self.user_number += 1
 
 
-    def get_credentials():
+    def get_credentials(self):
         """Gets valid user credentials from storage.
 
         If nothing has been stored, or if the stored credentials are invalid,
@@ -65,7 +65,7 @@ class gmailQuerier:
             print('Storing credentials to ' + credential_path)
         return credentials
 
-    def main():
+    def main(self):
         """Shows basic usage of the Gmail API.
 
         Creates a Gmail API service object and outputs a list of label names
