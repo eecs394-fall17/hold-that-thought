@@ -22,7 +22,7 @@ class gmailQuerier:
     def __init__(self):
         # If modifying these scopes, delete your previously saved credentials
         # at ~/.credentials/gmail-python-quickstart.json
-        self.SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+        self.SCOPES = 'https://mail.google.com/'
         self.CLIENT_SECRET_FILE = 'client_secret.json'
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
