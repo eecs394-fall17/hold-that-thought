@@ -22,7 +22,7 @@ class gmailQuerier:
     def __init__(self):
         # If modifying these scopes, delete your previously saved credentials
         # at ~/.credentials/gmail-python-quickstart.json
-        self.SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+        self.SCOPES = 'https://www.googleapis.com/auth/gmail.modify'
         self.CLIENT_SECRET_FILE = 'client_secret.json'
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
@@ -137,7 +137,7 @@ class gmailQuerier:
             msg_id: ID of Message to delete.
         """
         try:
-            service.users().messages().delete(userId=user_id, id=msg_id).execute()
+            service.users().messages().trash(userId=user_id, id=msg_id).execute()
             print('Message with id: %s deleted successfully.' % msg_id)
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
