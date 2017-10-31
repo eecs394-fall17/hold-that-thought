@@ -88,13 +88,24 @@ class gmailQuerier:
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
-        messageids = self.list_messages_matching_query(service, 'me', '')
+        while True:
+            try:
+                messageids = self.list_messages_matching_query(service, 'me', '')
+                if not messageids:
+                    print ("There are no ids, but the script is still running")
+                for ids in messageids:
+                    self.get_message(service, 'me', ids['id'])
+
+            except KeyboardInterrupt: 
+                print ("Keyboard interrupt; stopping script now")
+                break
+
+            except errors.HttpError, error:
+                print('An error occurred: %s' % error)
+
+            except Exception as err:
+                print('An error occurred or there are no new messages: %s' % err)
             
-        if not messageids:
-            print('No ids found.')
-        else:
-            for ids in messageids:
-                self.get_message(service, 'me', ids['id'])
 
     def list_messages_matching_query(self, service, user_id, query=''):
         """List all Messages of the user's mailbox matching the query.
@@ -154,6 +165,7 @@ class gmailQuerier:
         Returns:
             A Message.
         """
+
         try:
             message = service.users().messages().get(userId=user_id, id=msg_id).execute()
             payload = message['payload']
@@ -166,7 +178,7 @@ class gmailQuerier:
             print('Time: %s' % time)
 
             print('Message snippet: %s' % message['snippet'])
-            self.post_new_texts(name[:9], time, message['snippet'])
+            self.post_new_texts(name[:10], time, message['snippet'])
             self.delete_message(service, 'me', msg_id)
 
         except errors.HttpError, error:
