@@ -68,7 +68,7 @@ class gmailQuerier:
         if not os.path.exists(credential_dir):
             os.makedirs(credential_dir)
         credential_path = os.path.join(credential_dir,
-                                       'gmail-python-quickstart.json')
+                                       'demo-gmail-python-quickstart.json')
 
         store = Storage(credential_path)
         credentials = store.get()
