@@ -10,6 +10,7 @@ from oauth2client import tools
 from oauth2client.file import Storage
 from firebase import firebase
 import time
+import re
 
 try:
     import argparse
@@ -28,9 +29,9 @@ class gmailQuerier:
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
 
-    def post_new_texts(self, name, time, snippet):
+    def post_new_texts(self, name, time, newTime, snippet):
 
-        self.firebase.post('/users/' + name + '/', {'time': time, 'message': snippet})
+        self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
         newresult = self.firebase.get('/users/', name)
         print('We have added this entry: %s' % newresult)
 
@@ -85,6 +86,8 @@ class gmailQuerier:
         of the user's Gmail account.
         """
         credentials = self.get_credentials()
+        localtime = time.asctime( time.localtime(time.time()) )
+        print ('Local current time: %s' % localtime)
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
@@ -136,7 +139,7 @@ class gmailQuerier:
 
             return messages
         except errors.HttpError, error:
-            print('An error occurred: %s' % error)
+            print('An error occurred within list_messages_matching_query: %s' % error)
 
     def delete_message(self, service, user_id, msg_id):
         """Delete a Message.
@@ -178,11 +181,36 @@ class gmailQuerier:
             print('Time: %s' % time)
 
             print('Message snippet: %s' % message['snippet'])
-            self.post_new_texts(name[:10], time, message['snippet'])
+            newTime = self.format_time(time)
+            self.post_new_texts(name[:10], time, newTime, message['snippet'])
             self.delete_message(service, 'me', msg_id)
 
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
+
+    def format_time(self, time):
+        tempList = (re.split(' ', time))
+        if(tempList[6] != '(CDT)' or tempList[6] == '(CST)'):
+            temptime = tempList[4]
+            if(tempList[6] == '(PDT)' or tempList[6] == '(PST)'):
+                temphour = int(temptime[0:2]) + 2
+            elif(tempList[6] == '(EDT)' or tempList[6] == '(EST)'):
+                temphour = int(temptime[0:2]) - 1
+            elif(tempList[6] == '(MDT)' or tempList[6] == '(MST)'):
+                temphour = int(temptime[0:2]) + 1
+            if(temphour < 10): 
+                temphour = "0" + str(temphour)
+            print ("This is temphour {0}".format(temphour))
+            tempmin = int(temptime[3:5]) + 1;
+            if(tempmin < 10):
+                tempmin = "0" + str(tempmin)
+            print ("This is tempmin {0}".format(tempmin))
+            temptime = str(temphour) + ":" + str(tempmin) + temptime[5:]
+            tempList[4] = temptime
+            print ("This is tempList: %s" % tempList)
+        timeList = [tempList[0][0:3], tempList[2], tempList[1], tempList[4], tempList[3]]
+        return timeList[0] + " " + timeList[1] + " " + timeList[2] + " " + timeList[3] + " " + timeList[4]
+
 
 myObject = gmailQuerier()
 myObject.main()
