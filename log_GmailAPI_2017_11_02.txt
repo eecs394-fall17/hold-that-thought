@@ -1,0 +1,929 @@
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+get_message: Sender: 7148560077@mms.att.net, Time: Thu, 2 Nov 2017 09:54:06 -0700 (PDT), Message: Also yah Saturday will probs work. I will probs come. Also do u have a Costco card or ru just buying alc?
+delete_message: Message with id 15f7da77595732f8 deleted successfully
+get_message: Sender: 7148560077@mms.att.net, Time: Thu, 2 Nov 2017 12:53:03 -0400 (EDT), Message: Can you check if the lights are on at home?
+delete_message: Message with id 15f7da67d3f62411 deleted successfully
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: An error occurred or there are no new messages: list index out of range
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+get_message: Sender: 7148560077@mms.att.net, Time: Thu, 2 Nov 2017 17:06:26 -0700 (PDT), Message: Great job Eureka!
+delete_message: Message with id 15f7f33442869b72 deleted successfully
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+get_message: Sender: 7148560077@mms.att.net, Time: Thu, 2 Nov 2017 21:29:26 -0400 (EDT), Message: Hi Abitha, I have a question about the proposal. Get back to me when you can thanks!
+delete_message: Message with id 15f7f7f41964b1df deleted successfully
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+get_message: Sender: 2247149929@mms.att.net, Time: Fri, 3 Nov 2017 09:02:12 -0400 (EDT), Message: Hello there!
+delete_message: Message with id 15f81f97dfd26513 deleted successfully
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+We have started querying the GmailAPI!
+We have started querying the GmailAPI!
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+get_message: Sender: 2247149929@mms.att.net, Time: Fri, 3 Nov 2017 08:07:08 -0500 (CDT), Message: This is the demo!
+delete_message: Message with id 15f81fe056472749 deleted successfully
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
+list_messages_matching_query: list method called? NOT YET
+list_messages_matching_query: list method called? YES!
+Main: There are no ids, but the script is still running
