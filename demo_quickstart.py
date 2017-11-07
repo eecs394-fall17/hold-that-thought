@@ -28,6 +28,7 @@ class gmailQuerier:
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
+        self.sentMessages = [] 
 
         # Adding a log file to save our print statements
 
