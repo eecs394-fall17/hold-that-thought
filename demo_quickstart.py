@@ -164,7 +164,7 @@ class gmailQuerier:
                         print ("Before create message")
                         userTemp = str(user) + "@mms.att.net"
                         print("This is who we're sending the alert to: " + userTemp)
-                        alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                        alert = self.create_message("demoholdthatthought@gmail.com", userTemp, "Don't forget about this", snippet)
                         self.send_message(service, 'me', alert)
                         print ("We have sent the alert!")
                         url = 'users' + '/' + user + '/' + text
