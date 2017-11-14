@@ -12,6 +12,7 @@ from oauth2client.file import Storage
 from firebase import firebase
 import time
 import re
+import json
 
 try:
     import argparse
@@ -29,12 +30,15 @@ class gmailQuerier:
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
         self.sentMessages = [] 
+        self.mostRecentMessages = {}
 
     def post_new_texts(self, name, time, newTime, snippet):
 
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
         newresult = self.firebase.get('/users/', name)
+        self.mostRecentMessages[name] = snippet
         print('We have added this entry: %s' % newresult)
+        print('This is what mostRecentMessages is: %s' % self.mostRecentMessages)
 
 
         '''print("In post new texts: %s" % name)
@@ -215,21 +219,52 @@ class gmailQuerier:
             sent = headers[19]
             name = sender['value']
             time = sent['value']
+            text = message['snippet']
+            personalTime = 0
+
             print('Sender: %s' % name)
             print('Time: %s' % time)
+            print('Message snippet: %s' % text)
+            
+            if(text[0] == '+'):
+            	print("We have a request to set the time!")
+            	pos = text.lower().find('m')
+            	if(pos != -1):
+            		personalTime = int(text[1:pos])
+            		self.findMostRecentEntry(name[:10])
+            		self.delete_message(service, 'me', msg_id) # Deletes the set new time email 
 
-            print('Message snippet: %s' % message['snippet'])
-            newTime = self.format_time(time)
-            self.post_new_texts(name[:10], time, newTime, message['snippet'])
-            self.delete_message(service, 'me', msg_id)
+            else: # Else post it to the database 
+            	newTime = self.format_time(time, personalTime)
+            	self.post_new_texts(name[:10], time, newTime, message['snippet'])
+            	self.delete_message(service, 'me', msg_id)
 
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
-    def format_time(self, time):
+    def findMostRecentEntry(self, sender):
+    	result = self.firebase.get('/users', sender)
+    	print("-----These are all the entries for the sender who wants to change time----")
+    	print(json.dumps(result, indent=2))
+    	for key in result:
+    		if(result[key]["message"] == self.mostRecentMessages[sender]):
+    			print("We have found the most Recent message: %s" % result[key]["message"])
+    			time = result[key]["time"]
+    			newTime = "Some new time!"
+    			message = result[key]["message"]
+    			self.firebase.delete('/users/' + sender, key)
+    			print("We have deleted this key %s" % key)
+    			self.post_new_texts(sender, time, newTime, message)
+    			print("We have posted a newTime!")
+    			break
+
+
+    def format_time(self, time, personalTime):
         tempList = (re.split(' ', time))
         temptime = tempList[4]
         temphour = int(temptime[0:2])
+        
+        #if(personalTime == 0) if no default is set
         if(tempList[6] == '(CDT)' or tempList[6] == '(CST)'):
             temphour = int(temptime[0:2]) + 1 #adding one hour for alert
         elif(tempList[6] == '(PDT)' or tempList[6] == '(PST)'):
