@@ -13,6 +13,7 @@ from firebase import firebase
 import time
 import re
 import json
+import math
 
 try:
     import argparse
@@ -231,7 +232,7 @@ class gmailQuerier:
             	pos = text.lower().find('m')
             	if(pos != -1):
             		personalTime = int(text[1:pos])
-            		self.findMostRecentEntry(name[:10])
+            		self.findMostRecentEntry(name[:10], personalTime)
             		self.delete_message(service, 'me', msg_id) # Deletes the set new time email 
 
             else: # Else post it to the database 
@@ -242,7 +243,7 @@ class gmailQuerier:
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
-    def findMostRecentEntry(self, sender):
+    def findMostRecentEntry(self, sender, personalTime):
     	result = self.firebase.get('/users', sender)
     	print("-----These are all the entries for the sender who wants to change time----")
     	print(json.dumps(result, indent=2))
@@ -250,7 +251,7 @@ class gmailQuerier:
     		if(result[key]["message"] == self.mostRecentMessages[sender]):
     			print("We have found the most Recent message: %s" % result[key]["message"])
     			time = result[key]["time"]
-    			newTime = "Some new time!"
+    			newTime = self.format_time(time, personalTime)
     			message = result[key]["message"]
     			self.firebase.delete('/users/' + sender, key)
     			print("We have deleted this key %s" % key)
@@ -258,34 +259,59 @@ class gmailQuerier:
     			print("We have posted a newTime!")
     			break
 
+    def calculateNewTime(self, oldTime, addTime):
+        oldTime = self.format_time(oldTime)
+        tempList = (re.split(' ', oldTime))
+        print("This is what is in tempList: %s" % tempList)
+        #temptime = tempList[4]
+        #temphour = int(temptime[0:2])
+        #tempmin = int(temptime[3:5])
+        return "Added a Temp Time"
 
     def format_time(self, time, personalTime):
         tempList = (re.split(' ', time))
         temptime = tempList[4]
         temphour = int(temptime[0:2])
+        tempmin = int(temptime[3:5])
         
-        #if(personalTime == 0) if no default is set
+        #first, adjust timezone
+
         if(tempList[6] == '(CDT)' or tempList[6] == '(CST)'):
-            temphour = int(temptime[0:2]) + 1 #adding one hour for alert
+            temphour = int(temptime[0:2]) #no timezone change
         elif(tempList[6] == '(PDT)' or tempList[6] == '(PST)'):
-            temphour = int(temptime[0:2]) + 3 #adding three hours for +2 timezone and +1 alert
+            temphour = int(temptime[0:2]) + 2 #adding two hours for +2 timezone
         elif(tempList[6] == '(EDT)' or tempList[6] == '(EST)'):
-            temphour = int(temptime[0:2]) #-1 for timezone +1 for alert
+            temphour = int(temptime[0:2]) - 1 #-1 for timezone
         elif(tempList[6] == '(MDT)' or tempList[6] == '(MST)'):
-            temphour = int(temptime[0:2]) + 2 #+1 for timezone +1 for alert
+            temphour = int(temptime[0:2]) + 1 #+1 for timezone
+
+        #if no personaltime declared, add one hour as default; otherwise add personalTime to tempmin
+
+        if(personalTime == 0):
+            temphour = temphour + 1
+        elif(personalTime > 0):
+            #formatting time properly
+            addmin = personalTime % 60
+            addhour = int(math.floor(personalTime/60))
+            temphour = temphour + addhour
+            tempmin = tempmin + addmin
+
+            if(tempmin >= 60):
+                temphour = temphour + 1
+                tempmin = tempmin - 60
+
         if(temphour < 10): 
             temphour = "0" + str(temphour)
             print ("This is temphour {0}".format(temphour))
-            '''tempmin = int(temptime[3:5]) + 1;
-            if(tempmin < 10):
-                tempmin = "0" + str(tempmin)
+        if(tempmin < 10):
+            tempmin = "0" + str(tempmin)
             print ("This is tempmin {0}".format(tempmin))
-            temptime = str(temphour) + ":" + str(tempmin) + temptime[5:]'''
-        temptime = str(temphour) + temptime[2:]
+        
+        temptime = str(temphour) + ":" + str(tempmin) + temptime[5:]
         tempList[4] = temptime
         print ("This is tempList: %s" % tempList)
         timeList = [tempList[0][0:3], tempList[2], tempList[1], tempList[4], tempList[3]]
-        return timeList[0] + " " + timeList[1] + "  " + timeList[2] + " " + timeList[3] + " " + timeList[4]
+        return timeList[0] + " " + timeList[1] + " " + timeList[2] + " " + timeList[3] + " " + timeList[4]
 
     def create_message(self, sender, to, subject, message_text):
       """Create a message for an email.

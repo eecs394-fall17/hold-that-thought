@@ -28,6 +28,7 @@ class gmailQuerier:
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
+        self.sentMessages = [] 
 
         # Adding a log file to save our print statements
 
@@ -40,14 +41,10 @@ class gmailQuerier:
 
         '''print("In post new texts: %s" % name)
         result = self.firebase.get('/users/', name, snippet)
-
-
         if result is not None:
             print('We found a user')
-
         else:
             print('We did not find ')
-
             self.firebase.post('/users/' + name + '/', {'time': time, 'message': snippet})
             newresult = self.firebase.get('/users/', name)
             print('We have added this entry: %s' % newresult)'''
@@ -55,10 +52,8 @@ class gmailQuerier:
 
     def get_credentials(self):
         """Gets valid user credentials from storage.
-
         If nothing has been stored, or if the stored credentials are invalid,
         the OAuth2 flow is completed to obtain the new credentials.
-
         Returns:
             Credentials, the obtained credential.
         """
@@ -83,7 +78,6 @@ class gmailQuerier:
 
     def main(self):
         """Shows basic usage of the Gmail API.
-
         Creates a Gmail API service object and outputs a list of label names
         of the user's Gmail account.
         """
@@ -124,7 +118,6 @@ class gmailQuerier:
             can be used to indicate the authenticated user.
             query: String used to filter messages returned.
             Eg.- 'from:user@some_domain.com' for Messages from a particular sender.
-
         Returns:
             List of Messages that match the criteria of the query. Note that the
             returned list contains Message IDs, you must use get with the
@@ -164,7 +157,7 @@ class gmailQuerier:
                         print ("Before create message")
                         userTemp = str(user) + "@mms.att.net"
                         print("This is who we're sending the alert to: " + userTemp)
-                        alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                        alert = self.create_message("demoholdthatthought@gmail.com", userTemp, "Don't forget about this", snippet)
                         self.send_message(service, 'me', alert)
                         print ("We have sent the alert!")
                         url = 'users' + '/' + user + '/' + text
@@ -182,7 +175,6 @@ class gmailQuerier:
 
     def delete_message(self, service, user_id, msg_id):
         """Delete a Message.
-
         Args:
             service: Authorized Gmail API service instance.
             user_id: User's email address. The special value "me"
@@ -197,13 +189,11 @@ class gmailQuerier:
 
     def get_message(self, service, user_id, msg_id):
         """Get a Message with given ID.
-
         Args:
             service: Authorized Gmail API service instance.
             user_id: User's email address. The special value "me"
             can be used to indicate the authenticated user.
             msg_id: The ID of the Message required.
-
         Returns:
             A Message.
         """
@@ -255,13 +245,11 @@ class gmailQuerier:
 
     def create_message(self, sender, to, subject, message_text):
       """Create a message for an email.
-
       Args:
         sender: Email address of the sender.
         to: Email address of the receiver.
         subject: The subject of the email message.
         message_text: The text of the email message.
-
       Returns:
         An object containing a base64url encoded email object.
       """
@@ -273,13 +261,11 @@ class gmailQuerier:
 
     def send_message(self, service, user_id, message):
       """Send an email message.
-
       Args:
         service: Authorized Gmail API service instance.
         user_id: User's email address. The special value "me"
         can be used to indicate the authenticated user.
         message: Message to be sent.
-
       Returns:
         Sent Message.
       """
