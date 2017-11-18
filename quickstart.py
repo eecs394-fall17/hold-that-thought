@@ -236,8 +236,19 @@ class gmailQuerier:
             		self.delete_message(service, 'me', msg_id) # Deletes the set new time email 
 
             else: # Else post it to the database 
-            	newTime = self.format_time(time, personalTime)
-            	self.post_new_texts(name[:10], time, newTime, message['snippet'])
+            	ppos = text.lower().find('+')
+                print("This is ppos: %s" % ppos)
+                mpos = text.lower().find('m', ppos)
+                print("This is mpos: %s" % mpos)
+                if(ppos != -1 and mpos != -1):
+                    print("This should output the +xm: %s" % text[ppos+1:mpos])
+                    personalTime = int(text[(ppos+1):mpos])
+                    print("This is personalTime: %s" % personalTime)
+                newTime = self.format_time(time, personalTime)
+            	if(ppos != -1):
+                    self.post_new_texts(name[:10], time, newTime, text[0:ppos])
+                else:
+                    self.post_new_texts(name[:10], time, newTime, text)
             	self.delete_message(service, 'me', msg_id)
 
         except errors.HttpError, error:
@@ -288,7 +299,8 @@ class gmailQuerier:
         #if no personaltime declared, add one hour as default; otherwise add personalTime to tempmin
 
         if(personalTime == 0):
-            temphour = temphour + 1
+            temphour = 19
+            tempmin = 0
         elif(personalTime > 0):
             #formatting time properly
             addmin = personalTime % 60
