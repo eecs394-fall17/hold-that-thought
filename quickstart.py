@@ -44,14 +44,10 @@ class gmailQuerier:
 
         '''print("In post new texts: %s" % name)
         result = self.firebase.get('/users/', name, snippet)
-
-
         if result is not None:
             print('We found a user')
-
         else:
             print('We did not find ')
-
             self.firebase.post('/users/' + name + '/', {'time': time, 'message': snippet})
             newresult = self.firebase.get('/users/', name)
             print('We have added this entry: %s' % newresult)'''
@@ -59,10 +55,8 @@ class gmailQuerier:
 
     def get_credentials(self):
         """Gets valid user credentials from storage.
-
         If nothing has been stored, or if the stored credentials are invalid,
         the OAuth2 flow is completed to obtain the new credentials.
-
         Returns:
             Credentials, the obtained credential.
         """
@@ -87,7 +81,6 @@ class gmailQuerier:
 
     def main(self):
         """Shows basic usage of the Gmail API.
-
         Creates a Gmail API service object and outputs a list of label names
         of the user's Gmail account.
         """
@@ -128,7 +121,6 @@ class gmailQuerier:
             can be used to indicate the authenticated user.
             query: String used to filter messages returned.
             Eg.- 'from:user@some_domain.com' for Messages from a particular sender.
-
         Returns:
             List of Messages that match the criteria of the query. Note that the
             returned list contains Message IDs, you must use get with the
@@ -186,7 +178,6 @@ class gmailQuerier:
 
     def delete_message(self, service, user_id, msg_id):
         """Delete a Message.
-
         Args:
             service: Authorized Gmail API service instance.
             user_id: User's email address. The special value "me"
@@ -201,13 +192,11 @@ class gmailQuerier:
 
     def get_message(self, service, user_id, msg_id):
         """Get a Message with given ID.
-
         Args:
             service: Authorized Gmail API service instance.
             user_id: User's email address. The special value "me"
             can be used to indicate the authenticated user.
             msg_id: The ID of the Message required.
-
         Returns:
             A Message.
         """
@@ -228,15 +217,15 @@ class gmailQuerier:
             print('Message snippet: %s' % text)
             
             if(text[0] == '+'):
-            	print("We have a request to set the time!")
-            	pos = text.lower().find('m')
-            	if(pos != -1):
-            		personalTime = int(text[1:pos])
-            		self.findMostRecentEntry(name[:10], personalTime)
-            		self.delete_message(service, 'me', msg_id) # Deletes the set new time email 
+                print("We have a request to set the time!")
+                pos = text.lower().find('m')
+                if(pos != -1):
+                    personalTime = int(text[1:pos])
+                    self.findMostRecentEntry(name[:10], personalTime)
+                    self.delete_message(service, 'me', msg_id) # Deletes the set new time email 
 
             else: # Else post it to the database 
-            	ppos = text.lower().find('+')
+                ppos = text.lower().find('+')
                 print("This is ppos: %s" % ppos)
                 mpos = text.lower().find('m', ppos)
                 print("This is mpos: %s" % mpos)
@@ -245,30 +234,30 @@ class gmailQuerier:
                     personalTime = int(text[(ppos+1):mpos])
                     print("This is personalTime: %s" % personalTime)
                 newTime = self.format_time(time, personalTime)
-            	if(ppos != -1):
+                if(ppos != -1):
                     self.post_new_texts(name[:10], time, newTime, text[0:ppos])
                 else:
                     self.post_new_texts(name[:10], time, newTime, text)
-            	self.delete_message(service, 'me', msg_id)
+                self.delete_message(service, 'me', msg_id)
 
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
     def findMostRecentEntry(self, sender, personalTime):
-    	result = self.firebase.get('/users', sender)
-    	print("-----These are all the entries for the sender who wants to change time----")
-    	print(json.dumps(result, indent=2))
-    	for key in result:
-    		if(result[key]["message"] == self.mostRecentMessages[sender]):
-    			print("We have found the most Recent message: %s" % result[key]["message"])
-    			time = result[key]["time"]
-    			newTime = self.format_time(time, personalTime)
-    			message = result[key]["message"]
-    			self.firebase.delete('/users/' + sender, key)
-    			print("We have deleted this key %s" % key)
-    			self.post_new_texts(sender, time, newTime, message)
-    			print("We have posted a newTime!")
-    			break
+        result = self.firebase.get('/users', sender)
+        print("-----These are all the entries for the sender who wants to change time----")
+        print(json.dumps(result, indent=2))
+        for key in result:
+            if(result[key]["message"] == self.mostRecentMessages[sender]):
+                print("We have found the most Recent message: %s" % result[key]["message"])
+                time = result[key]["time"]
+                newTime = self.format_time(time, personalTime)
+                message = result[key]["message"]
+                self.firebase.delete('/users/' + sender, key)
+                print("We have deleted this key %s" % key)
+                self.post_new_texts(sender, time, newTime, message)
+                print("We have posted a newTime!")
+                break
 
     def calculateNewTime(self, oldTime, addTime):
         oldTime = self.format_time(oldTime)
@@ -327,13 +316,11 @@ class gmailQuerier:
 
     def create_message(self, sender, to, subject, message_text):
       """Create a message for an email.
-
       Args:
         sender: Email address of the sender.
         to: Email address of the receiver.
         subject: The subject of the email message.
         message_text: The text of the email message.
-
       Returns:
         An object containing a base64url encoded email object.
       """
@@ -345,13 +332,11 @@ class gmailQuerier:
 
     def send_message(self, service, user_id, message):
       """Send an email message.
-
       Args:
         service: Authorized Gmail API service instance.
         user_id: User's email address. The special value "me"
         can be used to indicate the authenticated user.
         message: Message to be sent.
-
       Returns:
         Sent Message.
       """
