@@ -30,7 +30,8 @@ class gmailQuerier:
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
-        self.sentMessages = [] 
+        self.sentMessages = []
+        self.mostRecentAlerts = {}
         self.mostRecentMessages = {}
 
     def post_new_texts(self, name, time, newTime, snippet):
@@ -359,6 +360,9 @@ class gmailQuerier:
         message = (service.users().messages().send(userId=user_id, body=message)
                    .execute())
         print ('Message Id: %s' % message['id'])
+        print ('This is message')
+        print (message) 
+        #self.mostRecentAlerts[user_id[:10]] = 
         return message
       except errors.HttpError, error:
         print ('An error occurred: %s' % error)
