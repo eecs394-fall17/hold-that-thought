@@ -14,6 +14,7 @@ import time
 import re
 import json
 import math
+import datetime
 
 try:
     import argparse
@@ -31,6 +32,7 @@ class gmailQuerier:
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
         self.sentMessages = [] 
+        self.mostRecentAlerts = {}
         self.mostRecentMessages = {}
 
     def post_new_texts(self, name, time, newTime, snippet):
@@ -127,6 +129,7 @@ class gmailQuerier:
             appropriate ID to get the details of a Message.
         """
         try:
+
             response = service.users().messages().list(userId=user_id,
                                                        q=query).execute()
             messages = []
@@ -137,8 +140,11 @@ class gmailQuerier:
               page_token = response['nextPageToken']
               response = service.users().messages().list(userId=user_id, q=query,
                                                  pageToken=page_token).execute()
+              print("This is response['messages']")
+              print(response['messages'])
               messages.extend(response['messages'])
 
+            print ("right before returning messages")
             return messages
         except errors.HttpError, error:
             print('An error occurred within list_messages_matching_query: %s' % error)
@@ -160,7 +166,10 @@ class gmailQuerier:
                         print ("Before create message")
                         userTemp = str(user) + "@mms.att.net"
                         print("This is who we're sending the alert to: " + userTemp)
-                        alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                        if(snippet in self.mostRecentAlerts):
+                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another Reminder", snippet)
+                        else:
+                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
                         self.send_message(service, 'me', alert)
                         print ("We have sent the alert!")
                         url = 'users' + '/' + user + '/' + text
@@ -247,26 +256,74 @@ class gmailQuerier:
         result = self.firebase.get('/users', sender)
         print("-----These are all the entries for the sender who wants to change time----")
         print(json.dumps(result, indent=2))
-        for key in result:
-            if(result[key]["message"] == self.mostRecentMessages[sender]):
-                print("We have found the most Recent message: %s" % result[key]["message"])
-                time = result[key]["time"]
-                newTime = self.format_time(time, personalTime)
-                message = result[key]["message"]
-                self.firebase.delete('/users/' + sender, key)
-                print("We have deleted this key %s" % key)
-                self.post_new_texts(sender, time, newTime, message)
-                print("We have posted a newTime!")
-                break
 
-    def calculateNewTime(self, oldTime, addTime):
-        oldTime = self.format_time(oldTime)
-        tempList = (re.split(' ', oldTime))
-        print("This is what is in tempList: %s" % tempList)
-        #temptime = tempList[4]
-        #temphour = int(temptime[0:2])
-        #tempmin = int(temptime[3:5])
-        return "Added a Temp Time"
+        alert_entry = {}
+        sent_entry = {}
+        main_entry = {}
+        alert_key = ""
+        sent_key = ""
+
+        for key in result:
+            if(result[key]["message"] == self.mostRecentAlerts[sender]):
+                alert_entry = result[key]
+                alert_key = key
+                print("We found the most recent alert message")
+                print(alert_entry["message"])
+
+            if(result[key]["message"] == self.mostRecentMessages[sender]):
+                sent_entry = result[key]
+                sent_key = key
+                print("We found the most recent sent message")
+                print(sent_entry["message"])
+
+        #compare times
+        #save entries (time, newTime, message) corresponding to most recent time
+        sent_entry_time = self.format_time(sent_entry["time"], -1)
+        formatted_time = datetime.datetime.strptime(sent_entry_time, "%c")
+
+        try: 
+            # The person has received an alert before 
+            formatted_alert_time = datetime.datetime.strptime(alert_entry["newTime"], "%c")
+
+            # Check if the alert time is newer than the last sent message
+            if (formatted_alert_time > formatted_time):
+                time = alert_entry["newTime"]
+                main_entry = alert_entry
+                key = alert_key
+                print('You want to snooze an alert')
+                newTime = self.calculateSnoozeTime(time, personalTime)
+                # Delete the alert so we can send another one later
+                self.sentMessages.remove(alert_entry["message"])
+                print('We have removed the past alert from sentMessages')
+                print('Updated sentMessages list')
+                print(self.sentMessages)
+
+            else:
+                time = sent_entry["time"]
+                main_entry = sent_entry
+                key = sent_key
+                print('You want to add time to a new message')
+                newTime = self.format_time(time, personalTime)
+        except:
+            # The person hasn't received an alert before
+            time = sent_entry["time"]
+            main_entry = sent_entry
+            key = sent_key
+            newTime = self.format_time(time, personalTime)
+
+        message = main_entry["message"]
+        self.firebase.delete('/users/' + sender, key)
+        print("We have deleted this key %s" % key)
+        self.post_new_texts(sender, main_entry["time"], newTime, message)
+        print("We have posted a newTime!")
+
+    def calculateSnoozeTime(self, oldTime, addTime):
+        formatted_time = datetime.datetime.strptime(oldTime, "%c")
+        new_time = formatted_time + datetime.timedelta(minutes=addTime)
+        new_time = new_time.strftime("%c") # Converts back to a string
+        print("This is the new_time")
+        print(new_time)
+        return new_time
 
     def format_time(self, time, personalTime):
         tempList = (re.split(' ', time))
@@ -290,7 +347,7 @@ class gmailQuerier:
         if(personalTime == 0):
             temphour = 19
             tempmin = 0
-        elif(personalTime > 0):
+        if(personalTime > 0):
             #formatting time properly
             addmin = personalTime % 60
             addhour = int(math.floor(personalTime/60))
@@ -301,6 +358,7 @@ class gmailQuerier:
                 temphour = temphour + 1
                 tempmin = tempmin - 60
 
+        # If personalTime is -1, it will skip above and just format the time 
         if(temphour < 10): 
             temphour = "0" + str(temphour)
             print ("This is temphour {0}".format(temphour))
@@ -328,6 +386,7 @@ class gmailQuerier:
       message['to'] = to
       message['from'] = sender
       message['subject'] = subject
+      self.mostRecentAlerts[to[:10]] = message_text
       return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
     def send_message(self, service, user_id, message):
