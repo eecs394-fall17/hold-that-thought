@@ -162,11 +162,12 @@ class gmailQuerier:
                 if (newTime[:16] == localtime[:16]):
                     print(self.sentMessages)
                     print(snippet)
+                    print("This is what is in mostRecentAlerts")
                     if(not snippet in self.sentMessages):
                         print ("Before create message")
                         userTemp = str(user) + "@mms.att.net"
                         print("This is who we're sending the alert to: " + userTemp)
-                        if(snippet in self.mostRecentAlerts):
+                        if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
                             alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another Reminder", snippet)
                         else:
                             alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
