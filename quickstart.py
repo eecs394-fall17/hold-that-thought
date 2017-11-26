@@ -311,12 +311,12 @@ class gmailQuerier:
             # Check if the alert time is newer than the last sent message
             if (formatted_alert_time > formatted_time):
                 print("BEFORE LOCAL TIME")
-                localtime = time.asctime( time.localtime(time.time()) ) # Time is equal to current local time
+                time = alert_entry["newTime"]
                 print("AFTER LOCAL TIME")
                 main_entry = alert_entry
                 key = alert_key
                 print('You want to snooze an alert')
-                newTime = self.calculateSnoozeTime(localtime, personalTime)
+                newTime = self.calculateSnoozeTime(time, personalTime)
                 print('This is the newTime!')
                 print (newTime) 
                 # Delete the alert so we can send another one later
