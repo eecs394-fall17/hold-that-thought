@@ -312,6 +312,7 @@ class gmailQuerier:
             if (formatted_alert_time > formatted_time):
                 print("BEFORE LOCAL TIME")
                 time = time.asctime( time.localtime(time.time()) ) # Time is equal to the current local time 
+                print("AFTER LOCAL TIME")
                 main_entry = alert_entry
                 key = alert_key
                 print('You want to snooze an alert')
