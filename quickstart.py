@@ -143,7 +143,6 @@ class gmailQuerier:
               print(response['messages'])
               messages.extend(response['messages'])
 
-            print ("right before returning messages")
             return messages
         except errors.HttpError, error:
             print('An error occurred within list_messages_matching_query: %s' % error)
