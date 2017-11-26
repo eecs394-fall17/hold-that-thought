@@ -309,7 +309,7 @@ class gmailQuerier:
                 print('This is the newTime!')
                 print (newTime) 
                 # Delete the alert so we can send another one later
-                sentMessagesdb = self.firebase.get('/sentMessages/', user)
+                sentMessagesdb = self.firebase.get('/sentMessages/' + user, None)
                 for entry in sentMessagesdb:
                     current_entry = sentMessagesdb.get(entry, None)
                     if (current_entry.get('sentMessage') == alert_entry["message"]):
@@ -328,6 +328,7 @@ class gmailQuerier:
                 newTime = self.format_time(time, personalTime)
         except:
             # The person hasn't received an alert before
+            print('You have not received an alert before')
             time = sent_entry["time"]
             main_entry = sent_entry
             key = sent_key
