@@ -161,7 +161,8 @@ class gmailQuerier:
                     if (self.firebase.get('/sentMessages/', user) != None): # Check there are sentMessages in the first place
                         sentMessagesdb = self.firebase.get('/sentMessages/' + user + '/', None)
                         for entry in sentMessagesdb:
-                            if (entry.get('sentMessage') == snippet):
+                            current_entry = sentMessagesdb.get(entry, None)
+                            if (current_entry.get('sentMessage') == snippet):
                                 print("We've already seen this message")
                                 break
                             else:
@@ -306,8 +307,9 @@ class gmailQuerier:
                 # Delete the alert so we can send another one later
                 sentMessagesdb = self.firebase.get('/sentMessages/', user)
                 for entry in sentMessagesdb:
-                    if (entry.get('sentMessage') == alert_entry["message"]):
-                        key = entry.getKey()
+                    current_entry = sentMessagesdb.get(entry, None)
+                    if (current_entry.get('sentMessage') == alert_entry["message"]):
+                        key = current_entry.getKey()
                         self.firebase.delete('/sentMessages/' + sender, key)
                         print('We have removed the past alert from sentMessages firebase')
                     else:
