@@ -159,6 +159,7 @@ class gmailQuerier:
                 localtime = time.asctime( time.localtime(time.time()) )
                 if (newTime[:16] == localtime[:16]): # Check if any messages have reached their time
                     if (self.firebase.get('/sentMessages/', user) != None): # Check there are sentMessages in the first place
+                        print("-----We found some sentMessages-----")
                         sentMessagesdb = self.firebase.get('/sentMessages/' + user + '/', None)
                         for entry in sentMessagesdb:
                             current_entry = sentMessagesdb.get(entry, None)
@@ -177,6 +178,7 @@ class gmailQuerier:
                                 url = 'users' + '/' + user + '/' + text # Do we still need this code??
                                 self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
                     else: # Else, assume first time user receiving alert
+                        print("-----Going into else statement -----")
                         userTemp = str(user) + "@mms.att.net"
                         print("This is who we're sending the alert to: " + userTemp)
                         if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
