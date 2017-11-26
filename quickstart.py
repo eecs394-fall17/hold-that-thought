@@ -310,6 +310,7 @@ class gmailQuerier:
 
             # Check if the alert time is newer than the last sent message
             if (formatted_alert_time > formatted_time):
+                print("BEFORE LOCAL TIME")
                 time = time.asctime( time.localtime(time.time()) ) # Time is equal to the current local time 
                 main_entry = alert_entry
                 key = alert_key
