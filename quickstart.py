@@ -165,7 +165,7 @@ class gmailQuerier:
                             current_entry = sentMessagesdb.get(entry, None)
                             if (current_entry.get('sentMessage') == snippet):
                                 print("We've already seen this message")
-                                break
+                                return 
                             else:
                                 userTemp = str(user) + "@mms.att.net"
                                 print("This is who we're sending the alert to: " + userTemp)
