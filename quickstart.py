@@ -337,7 +337,9 @@ class gmailQuerier:
                 key = sent_key
                 print('You want to add time to a new message')
                 newTime = self.format_time(time, personalTime)
-        except:
+        except Exception as err:
+            print('This is the error we got')
+            print err
             # The person hasn't received an alert before
             print('You have not received an alert before')
             time = sent_entry["time"]
