@@ -158,22 +158,35 @@ class gmailQuerier:
                 newTime = current_text.get('newTime')
                 localtime = time.asctime( time.localtime(time.time()) )
                 if (newTime[:16] == localtime[:16]): # Check if any messages have reached their time
-                    sentMessagesdb = self.firebase.get('/sentMessages/', user)
-                    for entry in sentMessagesdb:
-                        if (entry.get('sentMessage') == snippet):
-                            print("We've already seen this message")
-                            break
-                        else:
-                            userTemp = str(user) + "@mms.att.net"
-                            print("This is who we're sending the alert to: " + userTemp)
-                            if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
-                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                    if (self.firebase.get('/sentMessages/', user) != None): # Check there are sentMessages in the first place
+                        sentMessagesdb = self.firebase.get('/sentMessages/', user)
+                        for entry in sentMessagesdb:
+                            if (entry.get('sentMessage') == snippet):
+                                print("We've already seen this message")
+                                break
                             else:
-                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
-                            self.send_message(service, 'me', alert)
-                            print ("We have sent the alert!") 
-                            url = 'users' + '/' + user + '/' + text # Do we still need this code??
-                            self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
+                                userTemp = str(user) + "@mms.att.net"
+                                print("This is who we're sending the alert to: " + userTemp)
+                                if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
+                                    alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                                else:
+                                    alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                                self.send_message(service, 'me', alert)
+                                print ("We have sent the alert!") 
+                                url = 'users' + '/' + user + '/' + text # Do we still need this code??
+                                self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
+                    else: # Else, assume first time user receiving alert
+                        userTemp = str(user) + "@mms.att.net"
+                        print("This is who we're sending the alert to: " + userTemp)
+                        if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
+                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                        else:
+                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                        self.send_message(service, 'me', alert)
+                        print ("We have sent the alert!") 
+                        url = 'users' + '/' + user + '/' + text # Do we still need this code??
+                        self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
+
                     
             '''
             for text in users.get().each():
