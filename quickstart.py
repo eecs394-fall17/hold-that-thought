@@ -31,7 +31,6 @@ class gmailQuerier:
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
-        self.sentMessages = [] 
         self.mostRecentAlerts = {}
         self.mostRecentMessages = {}
 
@@ -159,24 +158,23 @@ class gmailQuerier:
                 snippet = current_text.get('message')
                 newTime = current_text.get('newTime')
                 localtime = time.asctime( time.localtime(time.time()) )
-                if (newTime[:16] == localtime[:16]):
-                    print(self.sentMessages)
-                    print(snippet)
-                    print("This is what is in mostRecentAlerts")
-                    if(not snippet in self.sentMessages):
-                        print ("Before create message")
-                        userTemp = str(user) + "@mms.att.net"
-                        print("This is who we're sending the alert to: " + userTemp)
-                        if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
-                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another Reminder", snippet)
+                if (newTime[:16] == localtime[:16]): # Check if any messages have reached their time
+                sentMessagesdb = self.firebase.get('/sentMessages/', user)
+                    for entry in sentMessagesdb:
+                        if (entry.get('sentMessage') == snippet):
+                            print("We've already seen this message")
+                            break
                         else:
-                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
-                        self.send_message(service, 'me', alert)
-                        print ("We have sent the alert!")
-                        url = 'users' + '/' + user + '/' + text
-                        self.sentMessages.append(str(snippet))
-                    else:
-                        print ("We've already seen this message")
+                            userTemp = str(user) + "@mms.att.net"
+                            print("This is who we're sending the alert to: " + userTemp)
+                            if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
+                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                            else:
+                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                            self.send_message(service, 'me', alert)
+                            print ("We have sent the alert!") 
+                            url = 'users' + '/' + user + '/' + text # Do we still need this code??
+                            self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
                     
             '''
             for text in users.get().each():
@@ -294,10 +292,15 @@ class gmailQuerier:
                 print('You want to snooze an alert')
                 newTime = self.calculateSnoozeTime(time, personalTime)
                 # Delete the alert so we can send another one later
-                self.sentMessages.remove(alert_entry["message"])
-                print('We have removed the past alert from sentMessages')
-                print('Updated sentMessages list')
-                print(self.sentMessages)
+                sentMessagesdb = self.firebase.get('/sentMessages/', user)
+                for entry in sentMessagesdb:
+                    if (entry.get('sentMessage') == alert_entry["message"]):
+                        key = entry.getKey()
+                        self.firebase.delete('/sentMessages/' + sender, key)
+                        print('We have removed the past alert from sentMessages firebase')
+                    else:
+                        pass
+
 
             else:
                 time = sent_entry["time"]
