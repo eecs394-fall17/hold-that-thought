@@ -86,8 +86,8 @@ class gmailQuerier:
         of the user's Gmail account.
         """
         credentials = self.get_credentials()
-        #localtime = time.asctime( time.localtime(time.time()) )
-        #print ('Local current time: %s' % localtime)
+        localtime = time.asctime( time.localtime(time.time()) )
+        print ('Local current time: %s' % localtime)
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
@@ -186,7 +186,6 @@ class gmailQuerier:
                             self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
 
                     else: # Else, assume first time user receiving alert
-                        print("-----Going into else statement -----")
                         userTemp = str(user) + "@mms.att.net"
                         print("This is who we're sending the alert to: " + userTemp)
                         if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
@@ -310,25 +309,18 @@ class gmailQuerier:
 
             # Check if the alert time is newer than the last sent message
             if (formatted_alert_time > formatted_time):
-                print("BEFORE LOCAL TIME")
                 time = alert_entry["newTime"]
-                print("AFTER LOCAL TIME")
                 main_entry = alert_entry
                 key = alert_key
                 print('You want to snooze an alert')
                 newTime = self.calculateSnoozeTime(time, personalTime)
-                print('This is the newTime!')
-                print (newTime) 
                 # Delete the alert so we can send another one later
                 sentMessagesdb = self.firebase.get('/sentMessages/' + sender, None)
                 for entry in sentMessagesdb:
                     current_entry = sentMessagesdb.get(entry, None)
-                    if (current_entry.get('sentMessage') == alert_entry["message"]):
-                        print('We found the sent Message and are about to delete') 
+                    if (current_entry.get('sentMessage') == alert_entry["message"]): 
                         self.firebase.delete('/sentMessages/' + sender, entry)
-                        print('We have removed the past alert from sentMessages firebase')
                     else:
-                        print('We havent found the sent message yet')
                         pass
             else:
                 time = sent_entry["time"]
@@ -337,9 +329,6 @@ class gmailQuerier:
                 print('You want to add time to a new message')
                 newTime = self.format_time(time, personalTime)
         except Exception as err:
-            print('This is the error we got')
-            print(err)
-            # The person hasn't received an alert before
             print('You have not received an alert before')
             time = sent_entry["time"]
             main_entry = sent_entry
