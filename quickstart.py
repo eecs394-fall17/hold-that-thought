@@ -159,7 +159,7 @@ class gmailQuerier:
                 localtime = time.asctime( time.localtime(time.time()) )
                 if (newTime[:16] == localtime[:16]): # Check if any messages have reached their time
                     if (self.firebase.get('/sentMessages/', user) != None): # Check there are sentMessages in the first place
-                        sentMessagesdb = self.firebase.get('/sentMessages/', user)
+                        sentMessagesdb = self.firebase.get('/sentMessages/' + user + '/', None)
                         for entry in sentMessagesdb:
                             if (entry.get('sentMessage') == snippet):
                                 print("We've already seen this message")
