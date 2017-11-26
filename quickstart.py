@@ -324,9 +324,8 @@ class gmailQuerier:
                 for entry in sentMessagesdb:
                     current_entry = sentMessagesdb.get(entry, None)
                     if (current_entry.get('sentMessage') == alert_entry["message"]):
-                        print('We found the sent Message and are about to delete')
-                        key = entry # NEED TO EDIT THIS PORTION! 
-                        self.firebase.delete('/sentMessages/' + sender, key)
+                        print('We found the sent Message and are about to delete') 
+                        self.firebase.delete('/sentMessages/' + sender, entry)
                         print('We have removed the past alert from sentMessages firebase')
                     else:
                         print('We havent found the sent message yet')
