@@ -34,8 +34,16 @@ class gmailQuerier:
         self.mostRecentAlerts = {}
         self.mostRecentMessages = {}
 
-    def post_new_texts(self, name, time, newTime, snippet):
+    def post_new_texts(self, service, name, time, newTime, snippet):
 
+        if(self.firebase.get('/users/', name) == None):
+            print("This is what name is inside post_new_texts")
+            print(name)
+            newusermsg = "I'll hold that thought and remind you at 7p tonight. \nFor information on how to use features like snooze, text Help at any time."
+            usertemp = str(name) + "@mms.att.net"
+            alert = self.create_message("holdthatthoughtapp@gmail.com", usertemp, "", newusermsg)
+            self.send_message(service, 'me', alert)
+        
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
         newresult = self.firebase.get('/users/', name)
         self.mostRecentMessages[name] = snippet
@@ -247,12 +255,19 @@ class gmailQuerier:
             print('Time: %s' % time)
             print('Message snippet: %s' % text)
             
-            if(text[0] == '+'):
+            
+            if(text.lower() == "help"):
+                helpmessage = "\nTo snooze \nReply with an amount of time to add. I understand responses like +2m or +120m. \n \nTo assign a specific time to a reminder \nAdd '+(timeincrement)m' to the end of the forwarded message \ni.e. 'Remember to get the milk +120m'"
+                alert = self.create_message("holdthatthoughtapp@gmail.com", name, "Hi there! Here are some helpful hints:", helpmessage)
+                self.send_message(service, 'me', alert)
+                self.delete_message(service, 'me', msg_id)
+
+            elif(text[0] == '+'):
                 print("We have a request to set the time!")
                 pos = text.lower().find('m')
                 if(pos != -1):
                     personalTime = int(text[1:pos])
-                    self.findMostRecentEntry(name[:10], personalTime)
+                    self.findMostRecentEntry(service, name[:10], personalTime)
                     self.delete_message(service, 'me', msg_id) # Deletes the set new time email 
 
             else: # Else post it to the database 
@@ -266,15 +281,15 @@ class gmailQuerier:
                     print("This is personalTime: %s" % personalTime)
                 newTime = self.format_time(time, personalTime)
                 if(ppos != -1):
-                    self.post_new_texts(name[:10], time, newTime, text[0:ppos])
+                    self.post_new_texts(service, name[:10], time, newTime, text[0:ppos])
                 else:
-                    self.post_new_texts(name[:10], time, newTime, text)
+                    self.post_new_texts(service, name[:10], time, newTime, text)
                 self.delete_message(service, 'me', msg_id)
 
         except errors.HttpError, error:
             print('An error occurred: %s' % error)
 
-    def findMostRecentEntry(self, sender, personalTime):
+    def findMostRecentEntry(self, service, sender, personalTime):
         result = self.firebase.get('/users', sender)
         print("-----These are all the entries for the sender who wants to change time----")
         print(json.dumps(result, indent=2))
@@ -338,7 +353,7 @@ class gmailQuerier:
         message = main_entry["message"]
         self.firebase.delete('/users/' + sender, key)
         print("We have deleted this key %s" % key)
-        self.post_new_texts(sender, main_entry["time"], newTime, message)
+        self.post_new_texts(service, sender, main_entry["time"], newTime, message)
         print("We have posted a newTime!")
 
     def calculateSnoozeTime(self, oldTime, addTime):
@@ -410,7 +425,8 @@ class gmailQuerier:
       message['to'] = to
       message['from'] = sender
       message['subject'] = subject
-      self.mostRecentAlerts[to[:10]] = message_text
+      if(subject != "Hi there! Here are some helpful hints:"):
+        self.mostRecentAlerts[to[:10]] = message_text
       return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
     def send_message(self, service, user_id, message):
