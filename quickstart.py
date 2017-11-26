@@ -86,8 +86,8 @@ class gmailQuerier:
         of the user's Gmail account.
         """
         credentials = self.get_credentials()
-        localtime = time.asctime( time.localtime(time.time()) )
-        print ('Local current time: %s' % localtime)
+        #localtime = time.asctime( time.localtime(time.time()) )
+        #print ('Local current time: %s' % localtime)
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
@@ -311,12 +311,12 @@ class gmailQuerier:
             # Check if the alert time is newer than the last sent message
             if (formatted_alert_time > formatted_time):
                 print("BEFORE LOCAL TIME")
-                time = time.asctime( time.localtime(time.time()) ) # Time is equal to the current local time 
+                localtime = time.asctime( time.localtime(time.time()) ) # Time is equal to current local time
                 print("AFTER LOCAL TIME")
                 main_entry = alert_entry
                 key = alert_key
                 print('You want to snooze an alert')
-                newTime = self.calculateSnoozeTime(time, personalTime)
+                newTime = self.calculateSnoozeTime(localtime, personalTime)
                 print('This is the newTime!')
                 print (newTime) 
                 # Delete the alert so we can send another one later
