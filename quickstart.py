@@ -299,13 +299,13 @@ class gmailQuerier:
 
             # Check if the alert time is newer than the last sent message
             if (formatted_alert_time > formatted_time):
-                time = alert_entry["newTime"]
+                time = time.asctime( time.localtime(time.time()) ) # Time is equal to the current local time 
                 main_entry = alert_entry
                 key = alert_key
                 print('You want to snooze an alert')
                 newTime = self.calculateSnoozeTime(time, personalTime)
                 # Delete the alert so we can send another one later
-                sentMessagesdb = self.firebase.get('/sentMessages/', user)
+                sentMessagesdb = self.firebase.get('/sentMessages/' + user + '/', None)
                 for entry in sentMessagesdb:
                     current_entry = sentMessagesdb.get(entry, None)
                     if (current_entry.get('sentMessage') == alert_entry["message"]):
@@ -314,7 +314,6 @@ class gmailQuerier:
                         print('We have removed the past alert from sentMessages firebase')
                     else:
                         pass
-
 
             else:
                 time = sent_entry["time"]
