@@ -139,8 +139,8 @@ class gmailQuerier:
               page_token = response['nextPageToken']
               response = service.users().messages().list(userId=user_id, q=query,
                                                  pageToken=page_token).execute()
-              print("This is response['messages']")
-              print(response['messages'])
+              #print("This is response['messages']")
+              #print(response['messages'])
               messages.extend(response['messages'])
 
             return messages
