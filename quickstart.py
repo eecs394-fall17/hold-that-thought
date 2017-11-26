@@ -306,17 +306,20 @@ class gmailQuerier:
                 key = alert_key
                 print('You want to snooze an alert')
                 newTime = self.calculateSnoozeTime(time, personalTime)
+                print('This is the newTime!')
+                print (newTime) 
                 # Delete the alert so we can send another one later
-                sentMessagesdb = self.firebase.get('/sentMessages/' + user + '/', None)
+                sentMessagesdb = self.firebase.get('/sentMessages/', user)
                 for entry in sentMessagesdb:
                     current_entry = sentMessagesdb.get(entry, None)
                     if (current_entry.get('sentMessage') == alert_entry["message"]):
+                        print('We found the sent Message and are about to delete')
                         key = current_entry.getKey()
                         self.firebase.delete('/sentMessages/' + sender, key)
                         print('We have removed the past alert from sentMessages firebase')
                     else:
+                        print('We havent found the sent message yet')
                         pass
-
             else:
                 time = sent_entry["time"]
                 main_entry = sent_entry
