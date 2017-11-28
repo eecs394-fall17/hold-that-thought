@@ -187,7 +187,7 @@ class gmailQuerier:
                             mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + user, None)
                             for entry in mostRecentAlertdb:
                                 current_entry = mostRecentAlertdb.get(entry, None)
-                                if current_entry.get('alertMessage' == snippet):
+                                if (current_entry.get('alertMessage') == snippet):
                                     alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
                                     break
                                 else: 
