@@ -31,7 +31,6 @@ class gmailQuerier:
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
-        self.mostRecentMessages = {}
 
     def post_new_texts(self, service, name, time, newTime, snippet):
 
@@ -45,10 +44,10 @@ class gmailQuerier:
         
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
         newresult = self.firebase.get('/users/', name)
-        self.mostRecentMessages[name] = snippet
+        self.firebase.post('/mostRecentMessage/' + name + '/', {'recentMessage': snippet})
         print('We have added this entry: %s' % newresult)
-        print('This is what mostRecentMessages is: %s' % self.mostRecentMessages)
-
+        print('This is what mostRecentMessage is:')
+        print(self.firebase.get('/mostRecentMessage/', name))
 
         '''print("In post new texts: %s" % name)
         result = self.firebase.get('/users/', name, snippet)
@@ -302,12 +301,19 @@ class gmailQuerier:
         alert_key = ""
         sent_key = ""
 
-        #Get the mostRecentAlert text
+        # Get the mostRecentAlert text
         mostRecentAlertText = ""
         mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + sender, None)
         for entry in mostRecentAlertdb:
             current_entry = mostRecentAlertdb.get(entry, None)
             mostRecentAlertText = current_entry.get('alertMessage')
+
+        # Get the mostRecentMessage text
+        mostRecentMessageText = ""
+        mostRecentMessagedb = self.firebase.get('/mostRecentMessage/' + sender, None)
+        for entry in mostRecentMessagedb:
+            current_entry = mostRecentMessagedb.get(entry, None)
+            mostRecentMessageText = current_entry.get('recentMessage')
 
         for key in result:
             if(result[key]["message"] == mostRecentAlertText):
@@ -316,7 +322,7 @@ class gmailQuerier:
                 print("We found the most recent alert message")
                 print(alert_entry["message"])
 
-            if(result[key]["message"] == self.mostRecentMessages[sender]):
+            if(result[key]["message"] == mostRecentMessageText):
                 sent_entry = result[key]
                 sent_key = key
                 print("We found the most recent sent message")
