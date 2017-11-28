@@ -182,7 +182,7 @@ class gmailQuerier:
                             userTemp = str(user) + "@mms.att.net"
                             print("This is who we're sending the alert to: " + userTemp)
                             # Check if mostRecentAlert in the database is the same as current snippet 
-                            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + user, None)
+                            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/', user)
                             for entry in mostRecentAlertdb:
                                 current_entry = mostRecentAlertdb.get(entry, None)
                                 if (current_entry.get('alertMessage') == snippet):
