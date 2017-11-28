@@ -430,7 +430,7 @@ class gmailQuerier:
       message['subject'] = subject
       if(subject != "Hi there! Here are some helpful hints:"):
         try: # If we have sent an alert in the past
-            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10])
+            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10], None)
             for entry in mostRecentAlertdb:
                 self.firebase.delete(mostRecentAlertdb, entry) # Delete current mostRecentAlert
         except Exception as err:
