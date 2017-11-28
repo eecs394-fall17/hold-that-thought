@@ -189,8 +189,10 @@ class gmailQuerier:
                                 current_entry = mostRecentAlertdb.get(entry, None)
                                 if current_entry.get('alertMessage' == snippet):
                                     alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                                    break
                                 else: 
                                     alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                                    break
                             self.send_message(service, 'me', alert)
                             print ("We have sent the alert!") 
                             self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
@@ -430,6 +432,7 @@ class gmailQuerier:
         message['subject'] = subject
         try: # If we have sent an alert in the past
             mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10], None)
+            print("We were able to find mostRecentAlertdb")
             for entry in mostRecentAlertdb:
                 self.firebase.delete('/mostRecentAlert/' + to[:10], entry) # Delete current mostRecentAlert
         except Exception as err:
@@ -438,7 +441,7 @@ class gmailQuerier:
             pass
         self.firebase.post('/mostRecentAlert/' + to[:10] + '/', {'alertMessage': message_text}) # Add entry to mostRecentAlert firebase
         print("We have added mostRecentAlert to the database!")
-        return {'raw': base64.urlsafe_b64encode(message.as_string())}
+      return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
     def send_message(self, service, user_id, message):
       """Send an email message.
