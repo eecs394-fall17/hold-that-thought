@@ -153,63 +153,63 @@ class gmailQuerier:
             print('An error occurred within list_messages_matching_query: %s' % error)
 
     def checkTime(self, service):
-        try:
-            usersdb = self.firebase.get('/users', None)
-            for user in usersdb:
-                all_texts = usersdb.get(user, None)
-                for text in all_texts:
-                    current_text = all_texts.get(text, None)
-                    snippet = current_text.get('message')
-                    newTime = current_text.get('newTime')
-                    localtime = time.asctime( time.localtime(time.time()) )
-                    if (newTime[:16] == localtime[:16]): # Check if any messages have reached their time
-                        if (self.firebase.get('/sentMessages/', user) != None): # Check there are sentMessages in the first place
-                            print("-----We found some sentMessages-----")
-                            sentMessagesdb = self.firebase.get('/sentMessages/', user)
-                            seen_message = False
-                            for entry in sentMessagesdb:
-                                current_entry = sentMessagesdb.get(entry, None)
-                                if (current_entry.get('sentMessage') == snippet):
-                                    print("We've already seen this message")
-                                    seen_message = True
-                                else:
-                                    continue
-                            if (seen_message == True):
-                                print("We have already seen the message and will not send an alert")
-                                return 
-                            else: # If we haven't seen the message, then send the alert!
-                                print("We have not seen the message")
-                                userTemp = str(user) + "@mms.att.net"
-                                print("This is who we're sending the alert to: " + userTemp)
-                                # Check if mostRecentAlert in the database is the same as current snippet 
-                                mostRecentAlertdb = self.firebase.get('/mostRecentAlert/', user)
-                                for entry in mostRecentAlertdb:
-                                    current_entry = mostRecentAlertdb.get(entry, None)
-                                    if (current_entry.get('alertMessage') == snippet):
-                                        alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
-                                        break
-                                    else: 
-                                        alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
-                                        break
-                                self.send_message(service, 'me', alert)
-                                print ("We have sent the alert!") 
-                                self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
-                                
-                        else: # Else, assume first time user receiving 
-                            userTemp = str(user) + "@mms.att.net"
-                            if (self.firebase.get('/mostRecentAlert/', user) != None): # We've sent an alert before
-                                print("This is the first time we're snoozing!")
-                                print("This is who we're sending the alert to: " + userTemp)
-                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+        #try:
+        usersdb = self.firebase.get('/users', None)
+        for user in usersdb:
+            all_texts = usersdb.get(user, None)
+            for text in all_texts:
+                current_text = all_texts.get(text, None)
+                snippet = current_text.get('message')
+                newTime = current_text.get('newTime')
+                localtime = time.asctime( time.localtime(time.time()) )
+                if (newTime[:16] == localtime[:16]): # Check if any messages have reached their time
+                    if (self.firebase.get('/sentMessages/', user) != None): # Check there are sentMessages in the first place
+                        print("-----We found some sentMessages-----")
+                        sentMessagesdb = self.firebase.get('/sentMessages/', user)
+                        seen_message = False
+                        for entry in sentMessagesdb:
+                            current_entry = sentMessagesdb.get(entry, None)
+                            if (current_entry.get('sentMessage') == snippet):
+                                print("We've already seen this message")
+                                seen_message = True
                             else:
-                                print("This is the first time the user is receiving an alert!")
-                                print("This is who we're sending the alert to: " + userTemp)
-                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                                continue
+                        if (seen_message == True):
+                            print("We have already seen the message and will not send an alert")
+                            return 
+                        else: # If we haven't seen the message, then send the alert!
+                            print("We have not seen the message")
+                            userTemp = str(user) + "@mms.att.net"
+                            print("This is who we're sending the alert to: " + userTemp)
+                            # Check if mostRecentAlert in the database is the same as current snippet 
+                            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/', user)
+                            for entry in mostRecentAlertdb:
+                                current_entry = mostRecentAlertdb.get(entry, None)
+                                if (current_entry.get('alertMessage') == snippet):
+                                    alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                                    break
+                                else: 
+                                    alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                                    break
                             self.send_message(service, 'me', alert)
                             print ("We have sent the alert!") 
                             self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
-        except:
-            self.firebase.post('/users/' + '2247149929' + '/', {'time': 'Tue, 28 Nov 2017 00:33:32 -0600 (CST)' , 'newTime': 'Tue Nov 28 00:34:32 2017', 'message': 'Whatever'})
+                            
+                    else: # Else, assume first time user receiving 
+                        userTemp = str(user) + "@mms.att.net"
+                        if (self.firebase.get('/mostRecentAlert/', user) != None): # We've sent an alert before
+                            print("This is the first time we're snoozing!")
+                            print("This is who we're sending the alert to: " + userTemp)
+                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                        else:
+                            print("This is the first time the user is receiving an alert!")
+                            print("This is who we're sending the alert to: " + userTemp)
+                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                        self.send_message(service, 'me', alert)
+                        print ("We have sent the alert!") 
+                        self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
+        #except:
+        #    self.firebase.post('/users/' + '2247149929' + '/', {'time': 'Tue, 28 Nov 2017 00:33:32 -0600 (CST)' , 'newTime': 'Tue Nov 28 00:34:32 2017', 'message': 'Whatever'})
             '''
             for text in users.get().each():
                 snippet = text.get('/message')
