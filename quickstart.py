@@ -303,12 +303,15 @@ class gmailQuerier:
         alert_key = ""
         sent_key = ""
 
-        #Get the mostRecentAlert text
+        # Get the mostRecentAlert text
         mostRecentAlertText = ""
-        mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + sender, None)
-        for entry in mostRecentAlertdb:
-            current_entry = mostRecentAlertdb.get(entry, None)
-            mostRecentAlertText = current_entry.get('alertMessage')
+        try: # Try seeing if the user has received an alert about their message (not the default app welcome)
+            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + sender, None)
+            for entry in mostRecentAlertdb:
+                current_entry = mostRecentAlertdb.get(entry, None)
+                mostRecentAlertText = current_entry.get('alertMessage')
+        except: # Else, we don't have a mostRecentAlertText
+            mostRecentAlertText = ""
 
         for key in result:
             if(result[key]["message"] == mostRecentAlertText):
