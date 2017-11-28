@@ -417,15 +417,15 @@ class gmailQuerier:
         return timeList[0] + " " + timeList[1] + " " + timeList[2] + " " + timeList[3] + " " + timeList[4]
 
     def create_message(self, sender, to, subject, message_text):
-      """Create a message for an email.
-      Args:
-        sender: Email address of the sender.
-        to: Email address of the receiver.
-        subject: The subject of the email message.
-        message_text: The text of the email message.
-      Returns:
-        An object containing a base64url encoded email object.
-      """
+        """Create a message for an email.
+        Args:
+            sender: Email address of the sender.
+            to: Email address of the receiver.
+            subject: The subject of the email message.
+            message_text: The text of the email message.
+        Returns:
+            An object containing a base64url encoded email object.
+        """
         message = MIMEText(message_text)
         message['to'] = to
         message['from'] = sender
