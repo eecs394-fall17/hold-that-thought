@@ -193,17 +193,7 @@ class gmailQuerier:
                                     alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
                             self.send_message(service, 'me', alert)
                             print ("We have sent the alert!") 
-                            url = 'users' + '/' + user + '/' + text # Do we still need this code??
                             self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
-
-                # Delete the alert so we can send another one later
-                sentMessagesdb = self.firebase.get('/sentMessages/' + sender, None)
-                for entry in sentMessagesdb:
-                    current_entry = sentMessagesdb.get(entry, None)
-                    if (current_entry.get('sentMessage') == alert_entry["message"]): 
-                        self.firebase.delete('/sentMessages/' + sender, entry)
-                    else:
-                        pass
                             
                     else: # Else, assume first time user receiving alert
                         userTemp = str(user) + "@mms.att.net"
