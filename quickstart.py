@@ -195,15 +195,14 @@ class gmailQuerier:
                             print ("We have sent the alert!") 
                             self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
                             
-                    else: # Else, assume first time user receiving alert
+                    else: # Else, assume first time user receiving 
+                        userTemp = str(user) + "@mms.att.net"
                         if (self.firebase.get('/mostRecentAlert/', user) != None): # We've sent an alert before
                             print("This is the first time we're snoozing!")
-                            userTemp = str(user) + "@mms.att.net"
                             print("This is who we're sending the alert to: " + userTemp)
                             alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
                         else:
                             print("This is the first time the user is receiving an alert!")
-                            userTemp = str(user) + "@mms.att.net"
                             print("This is who we're sending the alert to: " + userTemp)
                             alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
                         self.send_message(service, 'me', alert)
