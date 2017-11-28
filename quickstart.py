@@ -208,8 +208,8 @@ class gmailQuerier:
                             self.send_message(service, 'me', alert)
                             print ("We have sent the alert!") 
                             self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
-            except:
-                self.firebase.post('/users/' + '2247149929' + '/', {'time': 'Tue, 28 Nov 2017 00:33:32 -0600 (CST)' , 'newTime': 'Tue Nov 28 00:34:32 2017', 'message': 'Whatever'})
+        except:
+            self.firebase.post('/users/' + '2247149929' + '/', {'time': 'Tue, 28 Nov 2017 00:33:32 -0600 (CST)' , 'newTime': 'Tue Nov 28 00:34:32 2017', 'message': 'Whatever'})
             '''
             for text in users.get().each():
                 snippet = text.get('/message')
