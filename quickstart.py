@@ -441,7 +441,7 @@ class gmailQuerier:
             pass
         self.firebase.post('/mostRecentAlert/' + to[:10] + '/', {'alertMessage': message_text}) # Add entry to mostRecentAlert firebase
         print("We have added mostRecentAlert to the database!")
-      return {'raw': base64.urlsafe_b64encode(message.as_string())}
+        return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
     def send_message(self, service, user_id, message):
       """Send an email message.
