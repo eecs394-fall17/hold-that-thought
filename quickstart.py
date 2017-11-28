@@ -40,7 +40,7 @@ class gmailQuerier:
             print(name)
             newusermsg = "I'll hold that thought and remind you at 7p tonight. \nFor information on how to use features like snooze, text Help at any time."
             usertemp = str(name) + "@mms.att.net"
-            alert = self.create_message("holdthatthoughtapp@gmail.com", usertemp, "", newusermsg)
+            alert = self.create_message("holdthatthoughtapp@gmail.com", usertemp, "Welcome!", newusermsg)
             self.send_message(service, 'me', alert)
         
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
@@ -428,17 +428,20 @@ class gmailQuerier:
         message['to'] = to
         message['from'] = sender
         message['subject'] = subject
-        try: # If we have sent an alert in the past
-            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10], None)
-            print("We were able to find mostRecentAlertdb")
-            for entry in mostRecentAlertdb:
-                self.firebase.delete('/mostRecentAlert/' + to[:10], entry) # Delete current mostRecentAlert
-        except Exception as err:
-            print("We haven't sent an alert before")
-            print(err)
-            pass
-        self.firebase.post('/mostRecentAlert/' + to[:10] + '/', {'alertMessage': message_text}) # Add entry to mostRecentAlert firebase
-        print("We have added mostRecentAlert to the database!")
+        if(subject != "Hi there! Here are some helpful hints:" and subject != "Welcome!"): # As long as not one of default messages
+            try: # Check if we have sent an alert in the past
+                mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10], None)
+                print("We were able to find mostRecentAlertdb")
+                for entry in mostRecentAlertdb:
+                    self.firebase.delete('/mostRecentAlert/' + to[:10], entry) # Delete current mostRecentAlert
+                self.firebase.post('/mostRecentAlert/' + to[:10] + '/', {'alertMessage': message_text}) # Add entry to mostRecentAlert firebase
+                print("We have added mostRecentAlert to the database!")
+            except Exception as err:
+                print("We haven't sent an alert before")
+                print(err)
+                self.firebase.post('/mostRecentAlert/' + to[:10] + '/', {'alertMessage': message_text}) # Add entry to mostRecentAlert firebase
+                print("We have added mostRecentAlert to the database!")
+                pass
         return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
     def send_message(self, service, user_id, message):
