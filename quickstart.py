@@ -424,22 +424,21 @@ class gmailQuerier:
       Returns:
         An object containing a base64url encoded email object.
       """
-      message = MIMEText(message_text)
-      message['to'] = to
-      message['from'] = sender
-      message['subject'] = subject
-      if(subject != "Hi there! Here are some helpful hints:"):
+        message = MIMEText(message_text)
+        message['to'] = to
+        message['from'] = sender
+        message['subject'] = subject
         try: # If we have sent an alert in the past
             mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10], None)
             for entry in mostRecentAlertdb:
-                self.firebase.delete(mostRecentAlertdb, entry) # Delete current mostRecentAlert
+                self.firebase.delete('/mostRecentAlert/' + to[:10], entry) # Delete current mostRecentAlert
         except Exception as err:
             print("We haven't sent an alert before")
             print(err)
             pass
         self.firebase.post('/mostRecentAlert/' + to[:10] + '/', {'alertMessage': message_text}) # Add entry to mostRecentAlert firebase
         print("We have added mostRecentAlert to the database!")
-      return {'raw': base64.urlsafe_b64encode(message.as_string())}
+        return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
     def send_message(self, service, user_id, message):
       """Send an email message.
