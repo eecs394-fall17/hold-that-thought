@@ -44,7 +44,17 @@ class gmailQuerier:
         
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
         newresult = self.firebase.get('/users/', name)
+
+        # Try and delete any existing mostRecentMessage
+        try:
+            mostRecentMessagedb = self.firebase.get('/mostRecentMessage/' + name, None)
+
+            for entry in mostRecentMessagedb:
+                self.firebase.delete('/mostRecentMessage/' + name, entry)
+                print("We have deleted the mostRecentMessage")
+
         self.firebase.post('/mostRecentMessage/' + name + '/', {'recentMessage': snippet})
+        print("We have added the most recent message")
         print('We have added this entry: %s' % newresult)
         print('This is what mostRecentMessage is:')
         print(self.firebase.get('/mostRecentMessage/', name))
