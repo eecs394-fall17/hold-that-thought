@@ -52,6 +52,8 @@ class gmailQuerier:
             for entry in mostRecentMessagedb:
                 self.firebase.delete('/mostRecentMessage/' + name, entry)
                 print("We have deleted the mostRecentMessage")
+        except:
+            continue
 
         self.firebase.post('/mostRecentMessage/' + name + '/', {'recentMessage': snippet})
         print("We have added the most recent message")
