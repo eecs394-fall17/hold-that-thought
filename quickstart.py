@@ -31,7 +31,6 @@ class gmailQuerier:
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
-        self.mostRecentAlerts = {}
         self.mostRecentMessages = {}
 
     def post_new_texts(self, service, name, time, newTime, snippet):
@@ -98,8 +97,6 @@ class gmailQuerier:
         print ('Local current time: %s' % localtime)
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
-
-        
 
         while True:
             try:
@@ -184,28 +181,27 @@ class gmailQuerier:
                             print("We have not seen the message")
                             userTemp = str(user) + "@mms.att.net"
                             print("This is who we're sending the alert to: " + userTemp)
-                            if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
-                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
-                            else:
-                                alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                            # Check if mostRecentAlert in the database is the same as current snippet 
+                            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + user, None)
+                            for entry in mostRecentAlertdb:
+                                current_entry = mostRecentAlertdb.get(entry, None)
+                                if (current_entry.get('alertMessage') == snippet):
+                                    alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
+                                    break
+                                else: 
+                                    alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                                    break
                             self.send_message(service, 'me', alert)
                             print ("We have sent the alert!") 
-                            url = 'users' + '/' + user + '/' + text # Do we still need this code??
                             self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
-
+                            
                     else: # Else, assume first time user receiving alert
                         userTemp = str(user) + "@mms.att.net"
                         print("This is who we're sending the alert to: " + userTemp)
-                        if(user in self.mostRecentAlerts and self.mostRecentAlerts[user] == snippet):
-                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Another reminder", snippet)
-                        else:
-                            alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
+                        alert = self.create_message("holdthatthoughtapp@gmail.com", userTemp, "Don't forget about this", snippet)
                         self.send_message(service, 'me', alert)
                         print ("We have sent the alert!") 
-                        url = 'users' + '/' + user + '/' + text # Do we still need this code??
                         self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
-
-
                     
             '''
             for text in users.get().each():
@@ -300,8 +296,15 @@ class gmailQuerier:
         alert_key = ""
         sent_key = ""
 
+        #Get the mostRecentAlert text
+        mostRecentAlertText = ""
+        mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + sender, None)
+        for entry in mostRecentAlertdb:
+            current_entry = mostRecentAlertdb.get(entry, None)
+            mostRecentAlertText = current_entry.get('alertMessage')
+
         for key in result:
-            if(result[key]["message"] == self.mostRecentAlerts[sender]):
+            if(result[key]["message"] == mostRecentAlertText):
                 alert_entry = result[key]
                 alert_key = key
                 print("We found the most recent alert message")
@@ -412,22 +415,31 @@ class gmailQuerier:
         return timeList[0] + " " + timeList[1] + " " + timeList[2] + " " + timeList[3] + " " + timeList[4]
 
     def create_message(self, sender, to, subject, message_text):
-      """Create a message for an email.
-      Args:
-        sender: Email address of the sender.
-        to: Email address of the receiver.
-        subject: The subject of the email message.
-        message_text: The text of the email message.
-      Returns:
-        An object containing a base64url encoded email object.
-      """
-      message = MIMEText(message_text)
-      message['to'] = to
-      message['from'] = sender
-      message['subject'] = subject
-      if(subject != "Hi there! Here are some helpful hints:"):
-        self.mostRecentAlerts[to[:10]] = message_text
-      return {'raw': base64.urlsafe_b64encode(message.as_string())}
+        """Create a message for an email.
+        Args:
+            sender: Email address of the sender.
+            to: Email address of the receiver.
+            subject: The subject of the email message.
+            message_text: The text of the email message.
+        Returns:
+            An object containing a base64url encoded email object.
+        """
+        message = MIMEText(message_text)
+        message['to'] = to
+        message['from'] = sender
+        message['subject'] = subject
+        try: # If we have sent an alert in the past
+            mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10], None)
+            print("We were able to find mostRecentAlertdb")
+            for entry in mostRecentAlertdb:
+                self.firebase.delete('/mostRecentAlert/' + to[:10], entry) # Delete current mostRecentAlert
+        except Exception as err:
+            print("We haven't sent an alert before")
+            print(err)
+            pass
+        self.firebase.post('/mostRecentAlert/' + to[:10] + '/', {'alertMessage': message_text}) # Add entry to mostRecentAlert firebase
+        print("We have added mostRecentAlert to the database!")
+        return {'raw': base64.urlsafe_b64encode(message.as_string())}
 
     def send_message(self, service, user_id, message):
       """Send an email message.
