@@ -98,8 +98,6 @@ class gmailQuerier:
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
-        
-
         while True:
             try:
                 messageids = self.list_messages_matching_query(service, 'me', '')
