@@ -46,6 +46,14 @@ class gmailQuerier:
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
         newresult = self.firebase.get('/users/', name)
         self.mostRecentMessages[name] = snippet
+
+        #if mostRecentMessages is not empty, delete the entries
+        mostRecentTextdb = self.firebase.get('/mostRecentMessages/' + name, None)
+        if(mostRecentTextdb != None):
+            for entry in mostRecentTextdb:
+                self.firebase.delete('/mostRecentMessages/' + name, entry)
+
+        self.firebase.post('/mostRecentMessages/' + name + '/', {'mostRecentMessage': snippet})
         print('We have added this entry: %s' % newresult)
         print('This is what mostRecentMessages is: %s' % self.mostRecentMessages)
 
@@ -313,6 +321,16 @@ class gmailQuerier:
         except: # Else, we don't have a mostRecentAlertText
             mostRecentAlertText = ""
 
+        # Get the mostRecentMessage text
+        mostRecentSentText = ""
+        try: # Try seeing if the user has sent a text already
+            mostRecentTextdb = self.firebase.get('/mostRecentMessages/' + sender, None)
+            for entry in mostRecentTextdb:
+                temp_entry = mostRecentTextdb.get(entry, None)
+                mostRecentSentText = temp_entry.get('mostRecentMessage')
+        except:
+            mostRecentSentText = ""
+
         for key in result:
             if(result[key]["message"] == mostRecentAlertText):
                 alert_entry = result[key]
@@ -320,7 +338,7 @@ class gmailQuerier:
                 print("We found the most recent alert message")
                 print(alert_entry["message"])
 
-            if(result[key]["message"] == self.mostRecentMessages[sender]):
+            if(result[key]["message"] == mostRecentSentText):
                 sent_entry = result[key]
                 sent_key = key
                 print("We found the most recent sent message")
