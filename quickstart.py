@@ -38,9 +38,9 @@ class gmailQuerier:
         if(self.firebase.get('/users/', name) == None):
             print("This is what name is inside post_new_texts")
             print(name)
-            newusermsg = "I'll hold that thought and remind you at 7p tonight. \nFor information on how to use features like snooze, text Help at any time."
+            newusermsg = "I'll hold that thought and remind you about it at 7pm tonight. \nFor information on how to use other features like snooze, text Help at any time."
             usertemp = str(name) + "@mms.att.net"
-            alert = self.create_message("holdthatthoughtapp@gmail.com", usertemp, "Welcome!", newusermsg)
+            alert = self.create_message("holdthatthoughtapp@gmail.com", usertemp, "Welcome to HoldThatThought!", newusermsg)
             self.send_message(service, 'me', alert)
         
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
@@ -268,8 +268,8 @@ class gmailQuerier:
             
             
             if(text.lower() == "help"):
-                helpmessage = "\nTo snooze \nReply with an amount of time to add. I understand responses like +2m or +120m. \n \nTo assign a specific time to a reminder \nAdd '+(timeincrement)m' to the end of the forwarded message \ni.e. 'Remember to get the milk +120m'"
-                alert = self.create_message("holdthatthoughtapp@gmail.com", name, "Hi there! Here are some helpful hints:", helpmessage)
+                helpmessage = "\nTo snooze \nReply with an amount of time to add. I understand responses like +5m or +135m. \n \nTo assign a specific time to a reminder alert \nAdd '+(timeincrement)m' to the end of the forwarded message \ni.e. 'Can we set up a meeting for later today? +120m'"
+                alert = self.create_message("holdthatthoughtapp@gmail.com", name, "Here are some helpful hints:", helpmessage)
                 self.send_message(service, 'me', alert)
                 self.delete_message(service, 'me', msg_id)
 
@@ -456,7 +456,7 @@ class gmailQuerier:
         message['to'] = to
         message['from'] = sender
         message['subject'] = subject
-        if(subject != "Hi there! Here are some helpful hints:" and subject != "Welcome!"): # As long as not one of default messages
+        if(subject != "Here are some helpful hints:" and subject != "Welcome to HoldThatThought!"): # As long as not one of default messages
             try: # Check if we have sent an alert in the past
                 mostRecentAlertdb = self.firebase.get('/mostRecentAlert/' + to[:10], None)
                 print("We were able to find mostRecentAlertdb")
