@@ -62,7 +62,7 @@ To run the script, make sure you have installed the following dependencies:
 	$ sudo pip install python-firebase
 
 ## Setting up Firebase and Gmail Account
-Then, create a central Gmail account that will receive all forwarded texts from users at mail.google.com. Next, set up a Firebase project at https://firebase.google.com/. Turn on the Gmail API for your application by following the instructions on this webpage and register your application using your Firebase project. You will download a JSON file with the client ID and secret key needed for running the text bot. Save this JSON file as “client_secret.json” in the repository. 
+Then, create a central Gmail account that will receive all forwarded texts from users at [mail.google.com](http://mail.google.com). Next, set up a Firebase project at https://firebase.google.com/. Turn on the Gmail API for your application by following the instructions on this webpage and register your application using your Firebase project. You will download a JSON file with the client ID and secret key needed for running the text bot. Save this JSON file as “client_secret.json” in the repository. 
 
 Modify the following parts of quickstart.py to connect your script to Firebase and your Gmail account: 
 
@@ -83,8 +83,9 @@ To begin the text bot, simply run:
 	python quickstart.py 
 
 When running the script for the first time, the Gmail API will prompt you to sign in to your Gmail account in a browser window. Follow the instructions to sign in to your Gmail account. If you need to connect the API to a different account in the future, make sure to remove your saved credentials file first at ~/.credentials/gmail-python-quickstart.json.
-API Reference
-You may reference the following documentation for using Gmail API and Firebase in Python. 
+
+# API Reference
+You may reference the following documentation for using the Gmail API (https://developers.google.com/gmail/api/quickstart/python) and Firebase (https://pypi.python.org/pypi/python-firebase/1.2) in Python. 
 
 # Known Bugs
 The script currently only works when users are in the same timezone as where the script is being run. 
