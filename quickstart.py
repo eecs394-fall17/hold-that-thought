@@ -31,21 +31,16 @@ class gmailQuerier:
         self.APPLICATION_NAME = 'Gmail API Python Quickstart'
 
         self.firebase = firebase.FirebaseApplication('https://fir-demo-184316.firebaseio.com/', None)
-        self.mostRecentMessages = {}
 
     def post_new_texts(self, service, name, time, newTime, snippet):
 
         if(self.firebase.get('/users/', name) == None):
-            print("This is what name is inside post_new_texts")
-            print(name)
             newusermsg = "I'll hold that thought and remind you about it at 7pm tonight. \nFor information on how to use other features like snooze, text Help at any time."
             usertemp = str(name) + "@mms.att.net"
             alert = self.create_message("holdthatthoughtapp@gmail.com", usertemp, "Welcome to HoldThatThought!", newusermsg)
             self.send_message(service, 'me', alert)
         
         self.firebase.post('/users/' + name + '/', {'time': time, 'newTime': newTime, 'message': snippet})
-        newresult = self.firebase.get('/users/', name)
-        self.mostRecentMessages[name] = snippet
 
         #if mostRecentMessages is not empty, delete the entries
         mostRecentTextdb = self.firebase.get('/mostRecentMessages/' + name, None)
@@ -54,19 +49,6 @@ class gmailQuerier:
                 self.firebase.delete('/mostRecentMessages/' + name, entry)
 
         self.firebase.post('/mostRecentMessages/' + name + '/', {'mostRecentMessage': snippet})
-        print('We have added this entry: %s' % newresult)
-        print('This is what mostRecentMessages is: %s' % self.mostRecentMessages)
-
-
-        '''print("In post new texts: %s" % name)
-        result = self.firebase.get('/users/', name, snippet)
-        if result is not None:
-            print('We found a user')
-        else:
-            print('We did not find ')
-            self.firebase.post('/users/' + name + '/', {'time': time, 'message': snippet})
-            newresult = self.firebase.get('/users/', name)
-            print('We have added this entry: %s' % newresult)'''
 
 
     def get_credentials(self):
@@ -101,8 +83,6 @@ class gmailQuerier:
         of the user's Gmail account.
         """
         credentials = self.get_credentials()
-        localtime = time.asctime( time.localtime(time.time()) )
-        print ('Local current time: %s' % localtime)
         http = credentials.authorize(httplib2.Http())
         service = discovery.build('gmail', 'v1', http=http)
 
@@ -152,8 +132,6 @@ class gmailQuerier:
               page_token = response['nextPageToken']
               response = service.users().messages().list(userId=user_id, q=query,
                                                  pageToken=page_token).execute()
-              #print("This is response['messages']")
-              #print(response['messages'])
               messages.extend(response['messages'])
 
             return messages
@@ -161,7 +139,7 @@ class gmailQuerier:
             print('An error occurred within list_messages_matching_query: %s' % error)
 
     def checkTime(self, service):
-        #try:
+        #checks the times of all messages entered into the database to see if its time to send an alert
         usersdb = self.firebase.get('/users', None)
         for user in usersdb:
             all_texts = usersdb.get(user, None)
@@ -216,15 +194,6 @@ class gmailQuerier:
                         self.send_message(service, 'me', alert)
                         print ("We have sent the alert!") 
                         self.firebase.post('/sentMessages/' + user + '/', {'sentMessage': snippet}) # Add entry to sentMessages firebase
-        #except:
-        #    self.firebase.post('/users/' + '2247149929' + '/', {'time': 'Tue, 28 Nov 2017 00:33:32 -0600 (CST)' , 'newTime': 'Tue Nov 28 00:34:32 2017', 'message': 'Whatever'})
-            '''
-            for text in users.get().each():
-                snippet = text.get('/message')
-                newTime = text.get('/newTime')
-                print('This is the snippet ' + snippet)
-                print('This is the newTime ' + newTime)
-            '''
 
     def delete_message(self, service, user_id, msg_id):
         """Delete a Message.
@@ -261,10 +230,6 @@ class gmailQuerier:
             time = sent['value']
             text = message['snippet']
             personalTime = 0
-
-            print('Sender: %s' % name)
-            print('Time: %s' % time)
-            print('Message snippet: %s' % text)
             
             
             if(text.lower() == "help"):
@@ -274,7 +239,6 @@ class gmailQuerier:
                 self.delete_message(service, 'me', msg_id)
 
             elif(text[0] == '+'):
-                print("We have a request to set the time!")
                 pos = text.lower().find('m')
                 if(pos != -1):
                     personalTime = int(text[1:pos])
@@ -302,8 +266,6 @@ class gmailQuerier:
 
     def findMostRecentEntry(self, service, sender, personalTime):
         result = self.firebase.get('/users', sender)
-        print("-----These are all the entries for the sender who wants to change time----")
-        print(json.dumps(result, indent=2))
 
         alert_entry = {}
         sent_entry = {}
