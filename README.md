@@ -4,6 +4,7 @@
 Python 2.7 or greater
 
 # Synopsis
+![HoldThatThought demo image on phone](https://github.com/eecs394-fall17/hold-that-thought/blob/master/demo_image.jpg)
 HoldThatThought is a text bot that allows users to forward messages that they wish to be reminded about at a later time. It uses the Gmail API to query an inbox and records forwarded messages into a firebase.
 
 # Code Example
